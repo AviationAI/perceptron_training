@@ -1,9 +1,10 @@
 from .utils.math import avg_derivative
-from .utils.loss_activation import mse
+from .utils.loss_activation import mse, mape
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+
 
 
 # Class for linear regression 
@@ -18,7 +19,7 @@ class LinearRegression():
         self.data = data
 
     # trains model
-    def gradient_descent(self, lr = 1e-3, epochs = 5000):
+    def gradient_descent(self, lr = 1e-3, epochs = 10000):
         
         n =  self.num_weights
 
@@ -85,6 +86,7 @@ class LinearRegression():
             predictions.append(guess)
         
         tl = self.total_loss(predictions, expecteds)
+        mape_error = mape(predictions, expecteds)
         rmse = math.sqrt(tl)
         
         # R2 score
@@ -95,4 +97,4 @@ class LinearRegression():
         r2 = 1 - res/tot
 
 
-        return tl, r2, rmse
+        return tl, r2, rmse, mape_error

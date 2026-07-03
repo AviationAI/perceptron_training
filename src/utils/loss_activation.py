@@ -25,3 +25,13 @@ def mse(predictions: list, expecteds: list):
     return s/n
 
 
+def mape(predictions: list, expecteds: list):
+
+    errors = []
+    n = len(predictions)
+    for i in range(n):
+        errors.append(abs((expecteds[i] - predictions[i])/expecteds[i]))
+
+    s = sum(errors)
+
+    return s/n
